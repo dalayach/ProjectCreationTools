@@ -51,6 +51,8 @@ run_git_repo_initialization_script() {
 
 	done
 
+	run_git_command
+
 }
 
 run_git_command() {
@@ -60,12 +62,29 @@ run_git_command() {
         for each in ${final[@]}
         do
 
-                echo "$each"
+		git_repsonse=$(eval "$each")
+		echo "$git_response"
 
         done
 
+	ls -l -a
 	cd ..
 	pwd
+
+}
+
+closing_steps() {
+
+	echo ""
+	echo ""
+	echo "Your project $artifact_id has been created!"
+	echo "To create the jGRASP project, go to the Maven project, then MAKE SURE YOU STAY AT THE SAME LEVEL AS THE pom.xml."
+	echo "Then switch over to jGRASP, and create a new Project! REMEMBER, STAY AT THE SAME LEVEL AS THE pom.xml"
+	echo "When creating a new project, be sure that the project is one with a \"Other Project\" type."
+	echo "Make sure that the project DOES NOT CREATE a new directory!"
+	echo "From there, be sure that you prepend your SOURCE directory with src/main/java/io/github/dalayach/<insert folder name here>!"
+	echo "And for the test one, just do src/test/java. Adding the io.github seems to cause problems?"
+	echo "And also, please don't forget to implement the Maven exec:java functionality! BugFables has a good implementation of that."
 
 }
 
@@ -75,5 +94,5 @@ make_sure_user_has_created_repository_on_git_hub
 
 run_git_repo_initialization_script
 
-run_git_command
+closing_steps
 
